@@ -240,10 +240,10 @@ function handleAnswer(selected, targetBtn) {
 
 function setCapyState(stateName, msg) {
   const imgMap = {
-    calm: "assets/_crop_calm.png",
-    muybien: "assets/_crop_muybien.png",
-    que: "assets/_crop_que.png",
-    onsen: "assets/_crop_onsen.png"
+    calm: "assets/crop_calm.png",
+    muybien: "assets/crop_muybien.png",
+    que: "assets/crop_que.png",
+    onsen: "assets/crop_onsen.png"
   };
   const imgEl = document.getElementById("quiz-capy-img");
   const bubbleEl = document.getElementById("quiz-bubble-msg");
