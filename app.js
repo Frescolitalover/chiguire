@@ -91,15 +91,7 @@ function switchTense(tenseKey) {
   renderConjugations(currentVerb);
 }
 
-// 音声読み上げヘルパー（Web Speech API）
-function speakSpanish(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel(); // 連続タップ時の重複キャンセル
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'es-ES'; // スペイン語
-  utterance.rate = 0.9;     // 学習用にわずかにゆっくり
-  window.speechSynthesis.speak(utterance);
-}
+// 音声読み上げは audio_engine.js で高品質ニューラルMP3優先処理されます
 
 // 動詞カードの描画
 function renderVerb(v) {
