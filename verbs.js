@@ -328,7 +328,7 @@ const VERB_DATABASE = [
     present: ["compro", "compras", "compra", "compramos", "compráis", "compran"],
     pret_indef: ["compré", "compraste", "compró", "compramos", "comprasteis", "compraron"],
     pret_imperf: ["compraba", "comprabas", "compraba", "comprábamos", "comprabais", "compraban"],
-    futuro: ["compraré", "comprarás", "comparará", "compraremos", "compraréis", "comprarán"],
+    futuro: ["compraré", "comprarás", "comprará", "compraremos", "compraréis", "comprarán"],
     participio: "comprado",
     gerundio: "comprando"
   }
