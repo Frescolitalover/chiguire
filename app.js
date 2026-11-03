@@ -91,6 +91,16 @@ function switchTense(tenseKey) {
   renderConjugations(currentVerb);
 }
 
+// 音声読み上げヘルパー（Web Speech API）
+function speakSpanish(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel(); // 連続タップ時の重複キャンセル
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'es-ES'; // スペイン語
+  utterance.rate = 0.9;     // 学習用にわずかにゆっくり
+  window.speechSynthesis.speak(utterance);
+}
+
 // 動詞カードの描画
 function renderVerb(v) {
   document.getElementById("res-infinitive").textContent = v.infinitive;
@@ -98,6 +108,12 @@ function renderVerb(v) {
   document.getElementById("res-meaning").textContent = v.meaning;
   document.getElementById("res-participio").textContent = v.participio;
   document.getElementById("res-gerundio").textContent = v.gerundio;
+
+  // 原形音声ボタンのバインド
+  const voiceBtn = document.getElementById("res-voice-btn");
+  if (voiceBtn) {
+    voiceBtn.onclick = () => speakSpanish(v.infinitive);
+  }
 
   renderConjugations(v);
 }
@@ -114,11 +130,18 @@ function renderConjugations(v) {
   }
 
   PRONOUNS.forEach((pronoun, idx) => {
+    const word = forms[idx];
     const cell = document.createElement("div");
     cell.className = "conj-cell";
+    cell.style.cursor = "pointer";
+    cell.title = "タップして発音を聞く";
+    cell.onclick = () => speakSpanish(word);
     cell.innerHTML = `
-      <span class="conj-pronoun">${pronoun}</span>
-      <span class="conj-word">${forms[idx]}</span>
+      <div>
+        <span class="conj-pronoun">${pronoun}</span>
+        <span class="conj-word" style="margin-left: 8px;">${word}</span>
+      </div>
+      <button class="voice-icon-btn" aria-label="発音を聞く" style="background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--capy); padding:2px 6px;">🔊</button>
     `;
     container.appendChild(cell);
   });
@@ -209,6 +232,9 @@ function handleAnswer(selected, targetBtn) {
   const isCorrect = selected === currentQuizQuestion.answer;
   const allBtns = document.querySelectorAll(".quiz-opt-btn");
   allBtns.forEach(b => b.disabled = true);
+
+  // 正解の発音を再生
+  speakSpanish(currentQuizQuestion.answer);
 
   quizTotal++;
   document.getElementById("quiz-total").textContent = quizTotal;
