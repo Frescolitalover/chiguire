@@ -10,6 +10,13 @@ let currentTense = "present";
 let quizStreak = 0;
 let quizTotal = 0;
 let currentQuizQuestion = null;
+const weaknessCount = {
+  present: 0,
+  pret_indef: 0,
+  pret_imperf: 0,
+  futuro: 0,
+  pret_perf: 0
+};
 
 // 初期化
 document.addEventListener("DOMContentLoaded", () => {
@@ -241,6 +248,11 @@ function handleAnswer(selected, targetBtn) {
     quizStreak = 0;
     document.getElementById("quiz-streak").textContent = 0;
 
+    // 弱点時制をカウント
+    const tKey = currentQuizQuestion.tense.key;
+    weaknessCount[tKey] = (weaknessCount[tKey] || 0) + 1;
+    updateWeaknessUI(currentQuizQuestion.tense.name);
+
     // 正解のボタンをハイライト
     allBtns.forEach(b => {
       if (b.textContent === currentQuizQuestion.answer) {
@@ -254,6 +266,22 @@ function handleAnswer(selected, targetBtn) {
   setTimeout(() => {
     loadNewQuiz();
   }, 1400);
+}
+
+function updateWeaknessUI(lastWrongTenseName) {
+  const box = document.getElementById("quiz-weakness-box");
+  const textEl = document.getElementById("quiz-weakness-text");
+  if (!box || !textEl) return;
+
+  box.style.display = "block";
+  textEl.innerHTML = `直近で【<strong>${lastWrongTenseName}</strong>】のミスがありました。動詞の時制変化は、アプリで解くだけでなく<strong>紙に手書きして全パターンを体に染み込ませる</strong>のが最短の克服法です！`;
+}
+
+function shareQuizResult() {
+  const text = `Chigüire（チグイレ）式 スペイン語活用クイズに挑戦！\n🔥 連続正解：${quizStreak}問（累計：${quizTotal}問解いたぜ）\n全942単語ネイティブ音声付きでスキマ時間に学べる無料Webツール🦫\n#スペイン語 #チグイレクイズ\n`;
+  const url = "https://frescolitalover.github.io/chiguire/";
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+  window.open(twitterUrl, "_blank");
 }
 
 function setCapyState(stateName, msg) {

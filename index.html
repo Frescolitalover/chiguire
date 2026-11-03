@@ -672,6 +672,20 @@
         <div class="quiz-score-bar">
           <div>連続正解: <span id="quiz-streak" style="color:var(--capy); font-size:1.2rem; font-weight:800;">0</span> 回</div>
           <div>本日の回答数: <span id="quiz-total">0</span> 問</div>
+          <button id="quiz-share-btn" onclick="shareQuizResult()" style="background:#1DA1F2; color:#fff; border:none; padding:4px 12px; border-radius:16px; font-weight:700; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; gap:4px;">
+            𝕏 でシェア
+          </button>
+        </div>
+
+        <!-- 弱点分析＆ドリル直通案内バナー（動的表示） -->
+        <div id="quiz-weakness-box" style="display:none; margin-top:16px; padding:12px 16px; background:#FFF0F0; border:2px solid #FFCDD2; border-radius:12px; text-align:left;">
+          <div style="font-size:0.8rem; font-weight:800; color:#C62828;">⚠️ チグイレの弱点診断</div>
+          <div id="quiz-weakness-text" style="font-size:0.88rem; font-weight:700; color:#5A3A1E; margin:4px 0 8px;">
+            苦手な時制を分析中...
+          </div>
+          <a href="https://chiguire.booth.pm/items/9089553" target="_blank" style="display:inline-block; font-size:0.82rem; font-weight:800; color:#fff; background:#D7263D; padding:6px 14px; border-radius:20px; text-decoration:none;">
+            この弱点をドリル完全版で集中特訓する（500円） →
+          </a>
         </div>
       </div>
 

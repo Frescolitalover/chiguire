@@ -120,3 +120,14 @@ function renderPresident(savingsMonthly, savingsAnnual, profileName) {
   imgEl.src = `assets/hamster_${expr}.png`;
   speechEl.textContent = text;
 }
+
+function shareSavingsResult() {
+  const p = PROFILES[currentProfile];
+  const savingsMonthly = currentIncome * p.savings;
+  const annualSavings = savingsMonthly * 12;
+
+  const text = `ほおぶくろ銀行で家計バランスを診断してみた🐹\n私の手取り（${formatYen(currentIncome)}）の理想貯蓄は月${formatYen(savingsMonthly)}（年間${formatYen(annualSavings)}）でした！\n手取りを入れるだけで理想比率が1秒でわかる無料シミュレーター👇\n#ほおぶくろ銀行 #家計簿 #黄金比率\n`;
+  const url = "https://frescolitalover.github.io/chiguire/hoobukuro/";
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+  window.open(twitterUrl, "_blank");
+}
