@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ほおぶくろ銀行式 家計バランス診断＆1秒黄金比率シミュレーター</title>
+  <meta name="description" content="手取り月収を入力するだけで、一人暮らし・二人暮らし・家族の理想的な支出比率（家賃・食費・貯蓄）を1秒で自動計算。ハム頭取と一緒に無理のない貯蓄習慣を作ろう！">
+  <meta name="keywords" content="家計簿,黄金比率,シミュレーター,手取り,貯金,目安,一人暮らし,二人暮らし,固定費,ほおぶくろ銀行,Excel家計簿">
+  
+  <!-- OGP / SNS Card -->
+  <meta property="og:title" content="ほおぶくろ銀行式 家計バランス診断＆1秒黄金比率シミュレーター">
+  <meta property="og:description" content="手取り月収を入れるだけで、理想の支出割合と年間貯金額がすぐわかる！無料Excel家計簿も配布中。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://frescolitalover.github.io/chiguire/hoobukuro/">
+  <meta property="og:image" content="https://frescolitalover.github.io/chiguire/hoobukuro/assets/hamster_main.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- 構造化データ (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ほおぶくろ銀行式 家計バランス診断＆1秒黄金比率シミュレーター",
+    "description": "手取り月収から理想の家計比率・貯蓄見込み額を自動計算する無料ツール",
+    "url": "https://frescolitalover.github.io/chiguire/hoobukuro/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="./" class="brand-logo">
+        <img src="assets/hamster_main.png" alt="ほおぶくろ銀行 ハム頭取">
+        <div class="brand-text">
+          <h1>ほおぶくろ銀行</h1>
+          <p>生活と学びのデジタル工房 ✕ 家計マネジメント</p>
+        </div>
+      </a>
+      <div class="header-links">
+        <a href="https://chiguire.booth.pm/" target="_blank">BOOTH公式ショップ →</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ヒーローボックス -->
+    <div class="hero-box">
+      <div class="hero-avatar">
+        <img src="assets/hamster_main.png" alt="ハム頭取">
+      </div>
+      <div class="hero-content">
+        <h2>あなたの手取り、いくら貯めるのが正解？</h2>
+        <p>
+          「毎月いくら貯めればいいかわからない…」「今の家賃や食費は適正？」<br>
+          手取り月収を選ぶだけで、無理なく続けられる家計の黄金比率（住居・生活・ゆとり・貯金）を瞬時に診断します。
+        </p>
+      </div>
+    </div>
+
+    <!-- シミュレーター操作カード -->
+    <div class="sim-card">
+      <div class="control-group">
+        <div class="control-label">
+          <span>① あなたの現在の「手取り月収」</span>
+          <span class="income-display" id="income-display-val">¥250,000</span>
+        </div>
+        <div class="income-slider-wrap">
+          <input type="range" id="income-slider" min="120000" max="800000" step="10000" value="250000">
+          <input type="number" id="income-number" min="100000" max="1500000" step="10000" value="250000" style="width: 110px; padding: 6px; border: 1px solid var(--border); border-radius: 8px; font-weight: 700;">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">
+          <span>② 世帯タイプを選択</span>
+        </div>
+        <div class="seg-control">
+          <button class="seg-btn active" data-profile="single">一人暮らし</button>
+          <button class="seg-btn" data-profile="couple">二人暮らし (同棲・夫婦)</button>
+          <button class="seg-btn" data-profile="family">ファミリー (子育て世帯)</button>
+        </div>
+      </div>
+
+      <!-- 診断結果表示 -->
+      <div class="result-header">
+        <h3>📊 あなたの理想の家計バランス（月間目安）</h3>
+      </div>
+
+      <!-- ハム頭取のコメントバブル -->
+      <div class="president-card">
+        <img id="president-img" src="assets/hamster_happy.png" alt="ハム頭取の表情">
+        <div class="president-speech">
+          <div class="president-name">🐹 ハム頭取の家計アドバイス</div>
+          <div class="president-text" id="president-speech-text">
+            読み込み中...
+          </div>
+        </div>
+      </div>
+
+      <!-- 比率グリッド -->
+      <div class="balance-grid">
+        <div class="balance-item" style="--item-color: #3B82F6;">
+          <div class="item-top">
+            <span>🏠 住居費（家賃・管理費）</span>
+            <span id="pct-housing">25%</span>
+          </div>
+          <div class="item-amount" id="val-housing">¥62,500</div>
+          <div class="item-desc">手取りの25%以内が最も安全な上限目安です。</div>
+        </div>
+
+        <div class="balance-item" style="--item-color: #10B981;">
+          <div class="item-top">
+            <span>🥦 基本生活費（食費・光熱・通信）</span>
+            <span id="pct-living">30%</span>
+          </div>
+          <div class="item-amount" id="val-living">¥75,000</div>
+          <div class="item-desc">食費・日用品・水道光熱費・スマホ代を含みます。</div>
+        </div>
+
+        <div class="balance-item" style="--item-color: #EC4899;">
+          <div class="item-top">
+            <span>☕ ゆとり費（交際・趣味・自己投資）</span>
+            <span id="pct-leisure">20%</span>
+          </div>
+          <div class="item-amount" id="val-leisure">¥50,000</div>
+          <div class="item-desc">人生を豊かにするための使って良い枠です。</div>
+        </div>
+
+        <div class="balance-item" style="--item-color: #F59E0B;">
+          <div class="item-top">
+            <span>💰 ほお袋貯蓄（先取り貯金・投資）</span>
+            <span id="pct-savings">25%</span>
+          </div>
+          <div class="item-amount" id="val-savings" style="color: #D97706;">¥62,500</div>
+          <div class="item-desc">給与日に即ほお袋へ移す理想の積み立て枠です。</div>
+        </div>
+      </div>
+
+      <!-- 年間貯金額ハイライト -->
+      <div class="annual-savings-card">
+        <div>
+          <div class="annual-label">この黄金比率を1年間キープした場合の年間貯蓄額</div>
+          <div style="font-size: 0.8rem; opacity: 0.85;">※金貨がざくざく貯まります</div>
+        </div>
+        <div class="annual-amount" id="val-annual-savings">¥750,000</div>
+      </div>
+    </div>
+
+    <!-- プロダクト誘導・CTAセクション -->
+    <div class="promo-section">
+      <div class="promo-card">
+        <div>
+          <span class="promo-tag tag-free">無料ダウンロード</span>
+          <div class="promo-title">ほおぶくろ銀行 シンプル家計簿 2027</div>
+          <ul class="promo-features">
+            <li>Excel / Googleスプレッドシート両対応</li>
+            <li>日々の支出を入力するだけで自動集計</li>
+            <li>挫折しないシンプルな構成と頭取メッセージ</li>
+            <li>ずっと無料で使い続けられます</li>
+          </ul>
+        </div>
+        <a href="https://chiguire.booth.pm/items/7697415" target="_blank" class="promo-btn btn-free">
+          無料版を今すぐ入手する →
+        </a>
+      </div>
+
+      <div class="promo-card premium">
+        <div>
+          <span class="promo-tag tag-premium">一番人気（500円）</span>
+          <div class="promo-title">ほおぶくろ銀行 本格家計簿 2027</div>
+          <ul class="promo-features">
+            <li>費目別の月予算 ＆ 消化率リアルタイム判定</li>
+            <li>固定費シート入力で12ヶ月分に自動反映</li>
+            <li>年間の収支推移・内訳がひと目でわかる自動グラフ</li>
+            <li>頭取が予算管理の状況をリアルタイムで応援</li>
+          </ul>
+        </div>
+        <a href="https://chiguire.booth.pm/items/7697424" target="_blank" class="promo-btn btn-premium">
+          本格版の詳細を見る（500円） →
+        </a>
+      </div>
+    </div>
+
+    <!-- 法務免責事項 -->
+    <div class="legal-disclaimer">
+      <strong>【ご利用にあたっての免責事項・注意事項】</strong><br>
+      本シミュレーターの算出金額および比率は、公知のファイナンシャルプランニング指標（一般的な家計統計・生活設計目安）に基づき算出された参考数値です。個別の投資助言、特定の金融商品の推奨、税務・法律上の判断を行うものではありません。実際の支出計画や貯蓄は、ご自身のライフスタイル・家族構成・お住まいの地域等の個別事情に応じてご判断ください。
+    </div>
+  </main>
+
+  <footer>
+    <a href="../" class="sister-banner">
+      <span>🦫 姉妹サイト：Chigüire（チグイレ）式 スペイン語 動詞活用チェッカー＆瞬間クイズはこちら</span>
+    </a>
+    <div class="footer-copy">
+      © Mask Lab ✕ ほおぶくろ銀行｜生活と学びのデジタル工房<br>
+      日々の生活と家計を無理なく整える無料Webツール
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

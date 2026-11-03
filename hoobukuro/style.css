@@ -1,0 +1,496 @@
+:root {
+  --bg: #F7FAF6;
+  --card-bg: #FFFFFF;
+  --mint-dark: #1E6B42;
+  --mint: #2E8B57;
+  --mint-light: #E8F5E9;
+  --mint-subtle: #F1F8F3;
+  --gold: #F59E0B;
+  --gold-light: #FEF3C7;
+  --brown: #4A3525;
+  --brown-light: #7A5C43;
+  --gray: #9E9E9E;
+  --border: #E0EBDD;
+  --shadow: 0 4px 16px rgba(30, 107, 66, 0.08);
+  --shadow-lg: 0 8px 30px rgba(30, 107, 66, 0.12);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--brown);
+}
+
+body {
+  background-color: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー */
+header {
+  background: #FFFFFF;
+  padding: 16px 20px;
+  border-bottom: 2px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mint-light);
+  padding: 2px;
+}
+
+.brand-text h1 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--mint-dark);
+  line-height: 1.2;
+}
+
+.brand-text p {
+  font-size: 0.75rem;
+  color: var(--brown-light);
+}
+
+.header-links a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--mint-dark);
+  text-decoration: none;
+  background: var(--mint-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.header-links a:hover {
+  background: var(--mint);
+  color: #FFFFFF;
+}
+
+/* メインコンテンツ */
+main {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 0 16px;
+  width: 100%;
+  flex: 1;
+}
+
+/* ヒーロー紹介 */
+.hero-box {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--mint-subtle) 100%);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.hero-avatar img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.hero-content h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--mint-dark);
+  margin-bottom: 6px;
+}
+
+.hero-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--brown-light);
+}
+
+/* シミュレーターカード */
+.sim-card {
+  background: #FFFFFF;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 28px;
+}
+
+.control-group {
+  margin-bottom: 24px;
+}
+
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.income-display {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--mint-dark);
+}
+
+.income-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+input[type="range"] {
+  flex: 1;
+  accent-color: var(--mint);
+  height: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seg-control {
+  display: flex;
+  gap: 8px;
+  background: var(--mint-subtle);
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.seg-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.seg-btn.active {
+  background: #FFFFFF;
+  color: var(--mint-dark);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* 診断結果エリア */
+.result-header {
+  text-align: center;
+  padding: 16px 0;
+  border-top: 2px dashed var(--border);
+  margin-top: 16px;
+}
+
+.result-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--mint-dark);
+}
+
+/* ハム頭取メッセージバブル */
+.president-card {
+  background: var(--gold-light);
+  border: 2px solid #FDE68A;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.president-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.president-speech {
+  flex: 1;
+}
+
+.president-name {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #B45309;
+  margin-bottom: 4px;
+}
+
+.president-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #78350F;
+}
+
+/* 比率グリッド */
+.balance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.balance-item {
+  background: var(--mint-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.balance-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--item-color, var(--mint));
+}
+
+.item-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brown-light);
+  margin-bottom: 6px;
+}
+
+.item-amount {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--brown);
+  line-height: 1.2;
+}
+
+.item-desc {
+  font-size: 0.72rem;
+  color: #6B7280;
+  margin-top: 4px;
+}
+
+/* 年間貯金ハイライト */
+.annual-savings-card {
+  background: linear-gradient(135deg, #1E6B42 0%, #2E8B57 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(30, 107, 66, 0.2);
+  margin-top: 20px;
+}
+
+.annual-savings-card * {
+  color: #FFFFFF;
+}
+
+.annual-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.annual-amount {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* プロモーション・CTA エリア */
+.promo-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.promo-card {
+  background: #FFFFFF;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.promo-card:hover {
+  transform: translateY(-2px);
+}
+
+.promo-card.premium {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF5 100%);
+}
+
+.promo-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  align-self: flex-start;
+}
+
+.tag-free {
+  background: var(--mint-light);
+  color: var(--mint-dark);
+}
+
+.tag-premium {
+  background: var(--gold-light);
+  color: #B45309;
+}
+
+.promo-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.promo-features {
+  list-style: none;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--brown-light);
+  margin-bottom: 16px;
+}
+
+.promo-features li::before {
+  content: "✔ ";
+  color: var(--mint);
+  font-weight: 800;
+}
+
+.promo-btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-free {
+  background: var(--mint-light);
+  color: var(--mint-dark);
+  border: 1px solid var(--mint);
+}
+
+.btn-free:hover {
+  background: var(--mint);
+  color: #FFFFFF;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-premium:hover {
+  filter: brightness(1.05);
+}
+
+/* 法務・免責事項 */
+.legal-disclaimer {
+  background: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.75rem;
+  color: #6B7280;
+  line-height: 1.6;
+  margin: 24px 0;
+}
+
+.legal-disclaimer strong {
+  color: #4B5563;
+}
+
+/* フッター */
+footer {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border);
+  padding: 24px 20px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.sister-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFF8EE;
+  border: 1px solid #E8D8C8;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #5A3A1E;
+  margin-bottom: 14px;
+}
+
+.sister-banner:hover {
+  background: #FEEED8;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+
+/* スマホ表示最適化 */
+@media (max-width: 640px) {
+  .hero-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .promo-section {
+    grid-template-columns: 1fr;
+  }
+  .annual-savings-card {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
